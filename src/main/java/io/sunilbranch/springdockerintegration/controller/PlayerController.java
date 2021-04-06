@@ -52,4 +52,16 @@ public class PlayerController {
             return new ResponseEntity<String>("please check", HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping(value = "update/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> updatePlayer(@PathVariable Integer playerId, @Valid @RequestBody Player player){
+        Player servicePlayer = playerService.getPlayer(playerId);
+
+        if (servicePlayer.getId() > 0 && servicePlayer.getId().equals(player.getId())){
+            Player savePlayer = playerService.savePlayer(player);
+            return new ResponseEntity<>(savePlayer, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("no content", HttpStatus.NO_CONTENT);
+        }
+    }
 }
