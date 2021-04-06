@@ -13,4 +13,6 @@ public interface PlayerService {
     Player savePlayer(Player player);
 
     void deletePlayer(Integer playerID);
+
+    Player getPlayerByEmail(String email);
 }

@@ -47,4 +47,14 @@ public class PlayerServiceDaoImpl implements PlayerService {
         playerRepository.deleteById(playerID);
     }
 
+    @Override
+    public Player getPlayerByEmail(String email) {
+        if (!email.isEmpty()){
+            return playerRepository.findByEmail(email);
+        }else {
+            throw new PlayerNotFoundException("Player with email not found " + email);
+        }
+
+    }
+
 }

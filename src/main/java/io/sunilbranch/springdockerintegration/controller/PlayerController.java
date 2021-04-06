@@ -53,7 +53,7 @@ public class PlayerController {
         }
     }
 
-    @PutMapping(value = "update/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "update/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updatePlayer(@PathVariable Integer playerId, @Valid @RequestBody Player player){
         Player servicePlayer = playerService.getPlayer(playerId);
 
