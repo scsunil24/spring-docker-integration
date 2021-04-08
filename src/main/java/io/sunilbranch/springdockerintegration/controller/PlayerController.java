@@ -54,14 +54,21 @@ public class PlayerController {
     }
 
     @PutMapping(value = "update/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updatePlayer(@PathVariable Integer playerId, @Valid @RequestBody Player player){
+    public ResponseEntity<Object> updatePlayer(@PathVariable Integer playerId, @Valid @RequestBody Player player) {
         Player servicePlayer = playerService.getPlayer(playerId);
 
-        if (servicePlayer.getId() > 0 && servicePlayer.getId().equals(player.getId())){
+        if (servicePlayer.getId() > 0 && servicePlayer.getId().equals(player.getId())) {
             Player savePlayer = playerService.savePlayer(player);
             return new ResponseEntity<>(savePlayer, HttpStatus.OK);
-        }else {
+        } else {
             return new ResponseEntity<>("no content", HttpStatus.NO_CONTENT);
         }
+    }
+
+    @GetMapping(value = "get/{email}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
+    public ResponseEntity<Player> getPlayerByEmail(@PathVariable String email) {
+        Player playerByEmail = playerService.getPlayerByEmail(email);
+        return new ResponseEntity<Player>(playerByEmail, HttpStatus.FOUND);
+
     }
 }

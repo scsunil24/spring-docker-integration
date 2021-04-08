@@ -49,11 +49,14 @@ public class PlayerServiceDaoImpl implements PlayerService {
 
     @Override
     public Player getPlayerByEmail(String email) {
-        if (!email.isEmpty()){
-            return playerRepository.findByEmail(email);
-        }else {
-            throw new PlayerNotFoundException("Player with email not found " + email);
+        Optional<Player> optionalPlayer = playerRepository.findByEmail(email);
+
+        if (optionalPlayer.isPresent()) {
+            return optionalPlayer.get();
+        } else {
+            throw new PlayerNotFoundException("Player not found with Email :: " + email);
         }
+
 
     }
 
