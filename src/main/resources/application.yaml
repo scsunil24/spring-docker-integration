@@ -2,18 +2,34 @@ server:
   port: 8085
 
 spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#  datasource:
+#    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/polls_app
+#    username: root
+#    password: sunIl!098
+#    initialization-mode: ALWAYS
+#    dbcp2:
+#      validation-query: SELECT 1
+#      test-while-idle: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: test
+    password: test
   jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-  datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/polls_app
-    username: root
-    password: sunIl!098
-    initialization-mode: ALWAYS
-    dbcp2:
-      validation-query: SELECT 1
-      test-while-idle: true
+        hbm2dll.auto: update
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
